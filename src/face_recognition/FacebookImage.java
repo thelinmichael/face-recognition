@@ -33,7 +33,6 @@ public class FacebookImage {
 		return image;  
 	}
 	
-	/* Get and set */
 	public void setIcon(String icon) { this.url = icon; }
 	public String getIcon() { return this.url; }
 	public Bitmap getImage() { return this.image; }

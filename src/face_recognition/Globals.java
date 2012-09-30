@@ -12,7 +12,7 @@ import android.app.Application;
  */
 public class Globals extends Application {
 	
-	/* Application ID */
+	/* FB Application ID */
 	final private String APP_ID = "142471809184972";
 	
 	/* Facebook API */
@@ -37,7 +37,6 @@ public class Globals extends Application {
 		return singleton;
 	}
 		
-	/* Get and set methods. */
 	public void setFacebook(Facebook facebook) {
 		this.mFacebook = facebook;
 	}

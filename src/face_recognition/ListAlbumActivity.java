@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.face_recognition.R;
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.AsyncFacebookRunner.RequestListener;
 import com.facebook.android.DialogError;
@@ -17,7 +18,6 @@ import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.facebook.android.SessionStore;
 import com.facebook.android.Util;
-import com.mure_facebook.R;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -67,7 +67,10 @@ public class ListAlbumActivity extends ListActivity {
 	
 	/* Facebook permissions */
 	private String fbPermissions = "user_photos";
-		
+	
+	/* List */
+	ArrayAdapter listAdapter;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +86,8 @@ public class ListAlbumActivity extends ListActivity {
         Globals global = (Globals) getApplicationContext();
         mFacebook = global.getFacebook();
        	
-	    lv.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, facebookAlbums));  
+        listAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, facebookAlbums);
+	    lv.setAdapter(listAdapter); 
 
 	    fbAuthButton = (Button)findViewById(R.id.authButton);  // Button for login. Find it in R.java.
 		
@@ -139,9 +143,9 @@ public class ListAlbumActivity extends ListActivity {
 			SessionStore.save(that.mFacebook, that);
 			that.restart();
 		}
-		public void onFacebookError(FacebookError error) { /* ... */ }
-		public void onError(DialogError error) { /* ... */ }
-		public void onCancel() { /* ... */ }
+		public void onFacebookError(FacebookError error) { }
+		public void onError(DialogError error) { }
+		public void onCancel() { }
 	}
 	
 	/* Listens to click on Logout button -- Logs out and presents "first screen". */
@@ -182,8 +186,6 @@ public class ListAlbumActivity extends ListActivity {
 		 public void onComplete(final String response, Object state){
 			 /* Handle response from AsyncFacebookRunner
 			  * Create Facebook albums. */			 			 
-			 runOnUiThread(new Runnable() {
-				 public void run() {
 					 try {			
 					  	JSONObject jsonObj  = Util.parseJson(response);
 					  	JSONArray jsonArray = jsonObj.getJSONArray("data");
@@ -192,19 +194,22 @@ public class ListAlbumActivity extends ListActivity {
 							JSONObject obj = jsonArray.getJSONObject(i);
 							String fbAlbumName = obj.getString("name");
 							String fbAlbumId   = obj.getString("id");
-							facebookAlbums.add(new FacebookAlbum(fbAlbumName, fbAlbumId));						
+							facebookAlbums.add(new FacebookAlbum(fbAlbumName, fbAlbumId));		
 						}
-						setLogoutButton(); 
+						runOnUiThread(new Runnable() {
+						     public void run() {
+						    	 listAdapter.notifyDataSetChanged();								
+						    }
+						});
 					 } catch (JSONException e) { Log.d("JSONException", e.toString()); 
 					 } catch (FacebookError e) { Log.d("FacebookError", e.toString()); } 
 				 }
-			 });
-		 }
+
 		 public void onIOException(IOException e, Object state) { };
 		 public void onFileNotFoundException(FileNotFoundException e, Object state) { };
 		 public void onMalformedURLException(MalformedURLException e, Object state) { };
 		 public void onFacebookError(FacebookError e, Object state) { };
-	 }	 
+	 }
 	 
 	 /* What happens when someone clicks something in the list. */
 	 @Override
@@ -214,8 +219,7 @@ public class ListAlbumActivity extends ListActivity {
 		FacebookAlbum clickedAlbum = (FacebookAlbum) lv.getAdapter().getItem(position);
 	    String keyword = clickedAlbum.toString();
 	    // Show a little message about which album was clicked
-		Toast.makeText(this, "Viewing " + keyword, Toast.LENGTH_LONG).show();
-		
+		Toast.makeText(this, "Viewing " + keyword, Toast.LENGTH_LONG).show();		
 		Intent viewAlbumIntent = new Intent(this, ViewAlbumActivity.class);
 		viewAlbumIntent.putExtra("fbAlbum", clickedAlbum);
 		startActivity(viewAlbumIntent);		

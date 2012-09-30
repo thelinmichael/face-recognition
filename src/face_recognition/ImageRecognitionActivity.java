@@ -25,8 +25,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.mure_facebook.R;
-
 public class ImageRecognitionActivity extends Activity {
 
 	private Mat imageMat;
@@ -103,6 +101,5 @@ public class ImageRecognitionActivity extends Activity {
 		imageBitmap = Bitmap.createBitmap(imageMat.cols(), imageMat.rows(), Bitmap.Config.ARGB_8888);
 		Utils.matToBitmap(imageMat, imageBitmap);
 		imageView.setImageBitmap(imageBitmap); 
-		System.out.println("Image avec rectangle affichée");
 	}
 }

@@ -21,17 +21,6 @@ public class FacebookAlbum implements Parcelable  {
 		this.id   = id;
 	}
 	
-	/* Set & get functionality */
-	public String getName() { return this.name; }
-	public void setName(String name) { this.name = name; }
-	public String getId() { return this.id; }
-	public void setId(String id) { this.id = id; }
-	
-	public String toString() {
-		return this.name;
-	}
-	
-	
 	/* Parcelable interface stuff */
 	public FacebookAlbum(Parcel in) {
 		String[] data = new String[2];
@@ -61,4 +50,13 @@ public class FacebookAlbum implements Parcelable  {
 			return new FacebookAlbum[size];
 		}
 	};
+	
+	public String getName() { return this.name; }
+	public void setName(String name) { this.name = name; }
+	public String getId() { return this.id; }
+	public void setId(String id) { this.id = id; }
+	
+	public String toString() {
+		return this.name;
+	}
 }
