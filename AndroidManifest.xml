@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       android:versionCode="1"
-      android:versionName="1.0" package="com.face_recognition">
-    <uses-sdk android:minSdkVersion="8" />
+      android:versionName="1.0" 
+      package="se.michaelthelin.face_recognition">
+      
+   <uses-sdk android:minSdkVersion="8"
+        	 android:targetSdkVersion="17" />
 
+   <uses-permission android:name="android.permission.INTERNET" />
+    
     <application android:name=".Globals"
-                 android:icon="@drawable/icon" 
-                 android:label="@string/app_name"
-                 android:debuggable="true"
-                 >
+        		 android:icon="@drawable/icon" 
+	 			 android:label="@string/app_name"
+		         android:allowBackup="true">
         
         <activity android:name=".ListAlbumActivity"
-                  android:label="@string/app_name">
+            	  android:label="@string/app_name">
                   
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +25,9 @@
                    
         </activity>
 
-		<activity android:name="com.face_recognition.ViewAlbumActivity"></activity>
-		<activity android:name="com.face_recognition.ImageRecognitionActivity"></activity>
+		<activity android:name=".ViewAlbumActivity"></activity>
+		<activity android:name=".ImageRecognitionActivity"></activity>
 		
     </application>
     
-    <uses-permission android:name="android.permission.INTERNET"/>
-    
-    <uses-library>org.opencv.android</uses-library>
-    <uses-library>org.opencv.core</uses-library>
 </manifest>

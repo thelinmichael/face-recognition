@@ -30,16 +30,4 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>OpenCV-2.3.1_src</name>
-			<type>2</type>
-			<locationURI>_android_OpenCV_2_3_1_df28900a/src</locationURI>
-		</link>
-		<link>
-			<name>com_facebook_android_src</name>
-			<type>2</type>
-			<locationURI>_android_com_facebook_android_7f2a44f4/src</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
