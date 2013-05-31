@@ -26,3 +26,5 @@ proguard/
 
 # PDT-specific
 .buildpath
+
+lint.xml

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="loginButton">Facebook Login</string>
     <string name="app_name">Face Recognition</string>
+    <string name="app_id">142471809184972</string>
+    <string name="loginButton">Login</string>
     <string name="logoutButton">Logout</string>
 </resources>
