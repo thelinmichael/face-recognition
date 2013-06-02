@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Face Recognition</string>
-    <string name="app_id">142471809184972</string>
     <string name="loginButton">Login</string>
     <string name="logoutButton">Logout</string>
+    <string name="welcome">Welcome</string>
+    
+    <!--  Required: Change to your Facebook app id.
+          Create an app on Facebook if you don't have one, 
+          the id is in the settings. Have a look at #3 in this
+          tutorial if you're unsure of what you need to do. 
+          https://developers.facebook.com/docs/getting-started/facebook-sdk-for-android/3.0/ -->
+    <string name="app_id">103126939738641</string>
 </resources>
